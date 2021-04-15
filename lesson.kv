@@ -1,0 +1,1524 @@
+#:import get_hex_from_color kivy.utils.get_hex_from_color
+
+#:import MagicBehavior kivymd.uix.behaviors.MagicBehavior
+
+#:import get_hex_from_color kivy.utils.get_hex_from_color
+
+#:import images_path kivymd.images_path
+
+<Check@MDCheckbox>:
+    group: 'group'
+    size_hint: None, None
+    size: dp(48), dp(48)
+
+<MagicButton@MagicBehavior+MDRectangleFlatButton>
+ScreenManager:
+
+    LoadingScreen:
+    MenuScreen:
+    Etirler:
+    BizimleElaqe:
+    BizimBrendimiz:
+    TestEtir:
+    Huquqlar:
+    MarketinqVeQaydalar:
+    Axtaris:
+    GirisVeQeydiyyat:
+    Giris:
+    Qeydiyyat:
+    QeydiyyatNumEmailPassword:
+    QeydiyyatAuthenticator:
+    NewName:
+    ErrorScreen:
+    Profile:
+    ForgetPassword:
+    ForgetAuthenticationCode:
+    SifreDeyis:
+    ParfumePage:
+    EtirMelumat:
+    SifarisSehifesi:
+    SonSifaris:
+    IdIste:
+    QabSecimi:
+    IscidiYaYox:
+    QabKodu:
+<QabKodu>
+    name:'qabkodu'
+    Screen:
+        MDFloatLayout:
+            MDLabel:
+                halign:'center'
+                text:'Qabın kodunu yazın'
+                pos_hint:{'center_x':0.5,'center_y':0.6}
+            MDTextField:
+                mode:'rectangle'
+                pos_hint:{'center_x':0.5,'center_y':0.5}
+                size_hint_x:.7
+                id:kod
+            MDRectangleFlatButton:
+                text:'OK'
+                pos_hint:{'center_x':0.5,'center_y':0.4}
+                on_release:app.qabsecimioldu()
+
+<IscidiYaYox>
+    name:'iscidiyayox'
+    Screen:
+        MDFloatLayout:
+            MDLabel:
+                text:'Əgər bizim işçimizsinizsə id kodunuzu qeyd edin\nƏks təqdirdə Geri düyməsinə toxunun'
+                pos_hint:{'center_x':0.5,'center_y':0.7}
+                halign:'center'
+            MDTextField:
+                pos_hint:{'center_x':0.5,'center_y':0.5}
+                mode:'rectangle'
+                id:sifarisbitdiid
+                size_hint_x:.5
+            MDRectangleFlatButton:
+                text:'OK'
+                pos_hint:{'center_x':0.5,'center_y':0.4}
+                on_release:app.idyazildi()
+            MDRectangleFlatButton:
+                text:'Geri'
+                pos_hint:{'center_x':0.5,'center_y':0.3}
+                on_release:app.qabsecimi()
+
+<QabSecimi>
+    name:'qabsecimi'
+    Screen:
+        NavigationLayout:
+            ScreenManager:
+                Screen:
+                    BoxLayout:
+                        orientation:'vertical'
+                        MDToolbar:
+                            title:"KORONA PARFUME"
+                            elevation:10
+                            left_action_items:[["menu",lambda x: naw_drawer.set_state('toggle')]]
+                        MDFloatLayout:
+                            Carousel:
+                                id:crsl1
+
+            MDNavigationDrawer:
+                id:naw_drawer
+                BoxLayout:
+                    orientation:'vertical'
+                    ScrollView:
+                        MDList:
+                            OneLineAvatarListItem:
+                                text:"Menyu"
+                                on_release:root.manager.current='menu'
+                                IconLeftWidget:
+                                    icon:'menu'
+                                    on_release:root.manager.current='menu'
+                            OneLineAvatarListItem:
+                                text:"Axtarış"
+                                on_release:app.axtar_goster()
+                                IconLeftWidget:
+                                    icon:"magnify"
+                                    on_release:app.axtar_goster()
+                            OneLineAvatarListItem:
+                                text:"Ətirlər"
+                                on_release:root.manager.current='etirler'
+                                IconLeftWidget:
+                                    icon:"atom"
+                                    on_release:root.manager.current='etirler'
+                            OneLineAvatarListItem:
+                                text:"Bizim brendimiz"
+                                on_release:root.manager.current='bizimbrendimiz'
+                                IconLeftWidget:
+                                    icon:"shopping"
+                                    on_release:root.manager.current='bizimbrendimiz'
+                            OneLineAvatarListItem:
+                                text:"Bizimlə əlaqə"
+                                on_release:root.manager.current='bizimleelaqe'
+                                IconLeftWidget:
+                                    icon:'phone'
+                                    on_release:root.manager.current='bizimleelaqe'
+                            OneLineAvatarListItem:
+                                text:"All rights reserved"
+                                on_release:root.manager.current='huquqlar'
+                                IconLeftWidget:
+                                    icon:"copyright"
+                                    on_release:root.manager.current='huquqlar'
+                            OneLineAvatarListItem:
+                                text:"Marketinq və qaydalar"
+                                on_release:root.manager.current='marketinqveqaydalar'
+                                IconLeftWidget:
+                                    icon:"shopify"
+                                    on_release:root.manager.current='marketinqveqaydalar'
+<SonSifaris>
+    name:'sonsifaris'
+    Screen
+        MDFloatLayout:
+            MDLabel:
+                text:'Korona Parfume'
+                font_size:'25sp'
+                font_name:'CormorantUnicase-Light.ttf'
+                pos_hint:{'center_x':0.5,'center_y':0.9}
+                halign:'center'
+            MDSeparator:
+                pos_hint:{'center_x':0.5,'center_y':0.8}
+            MDTextField:
+                hint_text:'Ad və Soyad'
+                size_hint_x:.7
+                pos_hint:{'center_x':0.5,'center_y':0.7}
+                id:adsoyadsifaris
+                required:True
+            MDTextField:
+                hint_text:'Nömrə'
+                size_hint_x:.7
+                pos_hint:{'center_x':0.5,'center_y':0.6}
+                id:nomresifaris
+                required:True
+                input_filter: 'int'
+            MDTextField:
+                hint_text:'Ünvan'
+                size_hint_x:.7
+                pos_hint:{'center_x':0.5,'center_y':0.5}
+                id:unvansifaris
+                required:True
+            MDRectangleFlatButton:
+                pos_hint:{'center_x':0.5,'center_y':0.4}
+                text:'10ml'
+                on_release:app.sqy10()
+            MDRectangleFlatButton:
+                pos_hint:{'center_x':0.5,'center_y':0.3}
+                text:'20ml'
+                on_release:app.sqy20()
+            MDRectangleFlatButton:
+                pos_hint:{'center_x':0.5,'center_y':0.2}
+                text:'30ml'
+                on_release:app.sqy30()
+            MDRectangleFlatButton:
+                pos_hint:{'center_x':0.5,'center_y':0.1}
+                text:'50ml'
+                on_release:app.sqy50()
+
+
+
+<SifarisSehifesi>
+    name:'sifaris'
+    GridLayout:
+        cols:4
+        rows:3
+        padding:15
+        MDLabel:
+            text:'10ML'
+        MDLabel:
+            text:'20ML'
+        MDLabel:
+            text:'30ML'
+        MDLabel:
+            text:'50ML'
+        MDLabel:
+            id:ml10
+            text:''
+        MDLabel:
+            id:ml20
+            text:''
+        MDLabel:
+            id:ml30
+            text:''
+        MDLabel:
+            id:ml50
+            text:''
+    FloatLayout:
+        MDRaisedButton:
+            text:'Sifariş et'
+            pos_hint:{'center_x':0.5,'center_y':0.1}
+            on_release:app.sifariset()
+            id:sifariset
+
+<EtirMelumat>
+    name:'etirmelumat'
+    MDLabel:
+        id:etrinadisifarissehifesi
+        text:''
+        pos_hint:{'center_x':0.5,'center_y':0.9}
+        halign:'center'
+        font_name:'TrainOne-Regular.ttf'
+    GridLayout:
+        cols:2
+        rows:6
+        padding:15
+        MDLabel:
+            text:'Ətrin adı'
+            font_size:'14sp'
+        MDLabel:
+            id:etrinadisifarissehifesi
+            text:''
+            font_size:'15sp'
+        MDLabel:
+            text:'Tərkibi'
+            font_size:'14sp'
+        MDLabel:
+            text:''
+            id:terkibi
+            font_size:'14sp'
+        MDLabel:
+            text:'Cinsi'
+            font_size:'14sp'
+        MDLabel:
+            text:''
+            id:cinsi
+            font_size:'14sp'
+        MDLabel:
+            text:''
+        MDRaisedButton:
+            text:'Sifariş et'
+            on_release:app.sifariset()
+
+
+
+<ParfumePage>
+    name:'parfumepage'
+    FloatLayout:
+        MDCard:
+            orientation:'vertical'
+            size_hint:.9,.6
+            pos_hint:{'center_x':0.5,'center_y':0.5}
+            elevation:6
+            AsyncImage:
+                id:parfumephoto
+                source:''
+            MDLabel:
+                halign:'center'
+                id: etrinadiyazilacaqlabel
+                text:''
+                size_hint_y:.2
+                font_size:'16sp'
+                font_name:'NewTegomin-Regular.ttf'
+        BoxLayout:
+            orientation:'horizontal'
+            spacing:dp(30)
+            padding:dp(25)
+            MDRectangleFlatButton:
+                text:"Geri"
+                pos_hint_y:0.1
+                on_release:app.axtar_goster()
+                id:geriduymesi
+            MDRectangleFlatButton:
+                text:'Ətraflı'
+                on_release:app.etir_haqqinda_melumat()
+                id:etiretrafli
+
+
+<CustomOneLineIconListItem>:
+
+    IconLeftWidget:
+        icon: 'atom'
+
+
+<Axtaris>
+    name:"axtaris"
+    id:axtaris
+    Screen:
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing: dp(10)
+            padding: dp(20)
+
+            MDBoxLayout:
+                adaptive_height: True
+
+                MDIconButton:
+                    icon: 'magnify'
+
+                MDTextField:
+                    id: search_field
+                    hint_text: 'Ətrin adı ilə axtarın'
+                    on_text: app.set_list_md_icons(self.text, True)
+
+            RecycleView:
+                id: rv
+                key_viewclass: 'viewclass'
+                key_size: 'height'
+
+                RecycleBoxLayout:
+                    padding: dp(10)
+                    default_size: None, dp(48)
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    orientation: 'vertical'
+
+
+
+
+
+<SifreDeyis>
+    name:'sifredeyismeyeri'
+    Screen:
+        MDFloatLayout:
+            MDIconButton:
+                icon:'account-key'
+                pos_hint:{'center_x':0.5,'center_y':0.9}
+            MDSeparator:
+                pos_hint:{'center_x':0.5,'center_y':0.8}
+            MDTextField:
+                pos_hint:{'center_x':0.5,'center_y':0.7}
+                hint_text:'Yeni şifrə'
+                id:newpassword
+                size_hint_x:.7
+            MDTextField:
+                size_hint_x:.7
+                id:newpasswordagain
+                hint_text:'Şifrəni təkrarlayın'
+                pos_hint:{'center_x':0.5,'center_y':0.6}
+            MDRectangleFlatButton:
+                text:'Növbəti'
+                pos_hint:{'center_x':0.5,'center_y':0.5}
+                on_release:app.check_new_password()
+            MagicButton:
+                on_press:self.wobble()
+                text:"Ləğv et"
+                pos_hint:{'center_x':0.2,'center_y':0.1}
+                on_release:app.sifre_deyisme_legv_et()
+<ForgetAuthenticationCode>
+    name:'forgetauthenticationcode'
+    Screen:
+        MDFloatLayout:
+            MDLabel:
+                text:'İdentifikasiya kodunuz:'
+                pos_hint:{'center_x':0.5,'center_y':0.7}
+                halign:'center'
+            MDTextField:
+                mode:'rectangle'
+                size_hint_x:.7
+                halign:'center'
+                input_filter:'int'
+                required:True
+                id:forgetauthenticationcode
+                pos_hint:{'center_x':0.5,'center_y':0.5}
+            MDRectangleFlatButton:
+                text:'Növbəti'
+                halign:'center'
+                pos_hint:{'center_x':0.5,'center_y':0.3}
+                on_release:app.forget_check_authentication_code()
+            MDTextButton:
+                text:'Kodu yenidən göndər'
+                pos_hint:{'center_x':0.5,'center_y':0.2}
+                on_release:app.forget_resend_authentication_code()
+            MagicButton:
+                on_press:self.wobble()
+                text:"Geri"
+                pos_hint:{'center_x':0.2,'center_y':0.1}
+                on_release:app.back_from_forget()
+<ForgetPassword>
+    name:'forgetpassword'
+    Screen:
+        MDFloatLayout:
+            MDTextField:
+                hint_text:'İstifadəçi adınız'
+                halign:'center'
+                size_hint_x:.7
+                id:forgetusername
+                pos_hint:{'center_x':0.5,'center_y':0.7}
+            MDRectangleFlatButton:
+                text:'Növbəti'
+                pos_hint:{'center_x':0.5,'center_y':0.5}
+                on_release:app.forget_check_username()
+            MagicButton:
+                on_press:self.wobble()
+                text:"Geri"
+                pos_hint:{'center_x':0.2,'center_y':0.1}
+                on_release:root.manager.current='giris'
+
+<Profile>
+    name:'profil'
+    Screen:
+        NavigationLayout:
+            ScreenManager:
+                Screen:
+                    BoxLayout:
+                        orientation:'vertical'
+                        MDToolbar:
+                            title:"KORONA PARFUME"
+                            elevation:10
+                            left_action_items:[["menu",lambda x: naw_drawer.set_state('toggle')]]
+                        MDGridLayout:
+                            cols:2
+                            rows:3
+                            padding:5
+                            spacing:10
+                            MDIcon:
+                                icon:'account'
+                            MDLabel:
+                                id:labelforusername
+                                text:'Istifadeci adi olan yer'
+                            MDIcon:
+                                icon:'email'
+                            MDLabel:
+                                id:labelformail
+                                text:'Mail olan yer'
+                            MDIcon:
+                                icon:'contact-mail-outline'
+                            MDLabel:
+                                id:labelforid
+                                text:'Id yazilacaq yer'
+
+            MDNavigationDrawer:
+                id:naw_drawer
+                BoxLayout:
+                    orientation:'vertical'
+                    ScrollView:
+                        MDList:
+                            OneLineAvatarListItem:
+                                text:"Menyu"
+                                on_release:root.manager.current='menu'
+                                IconLeftWidget:
+                                    icon:'menu'
+                                    on_release:root.manager.current='menu'
+                            OneLineAvatarListItem:
+                                text:"Axtarış"
+                                on_release:app.axtar_goster()
+                                IconLeftWidget:
+                                    icon:"magnify"
+                                    on_release:app.axtar_goster()
+                            OneLineAvatarListItem:
+                                text:"Ətirlər"
+                                on_release:root.manager.current='etirler'
+                                IconLeftWidget:
+                                    icon:"atom"
+                                    on_release:root.manager.current='etirler'
+                            OneLineAvatarListItem:
+                                text:"Bizim brendimiz"
+                                on_release:root.manager.current='bizimbrendimiz'
+                                IconLeftWidget:
+                                    icon:"shopping"
+                                    on_release:root.manager.current='bizimbrendimiz'
+                            OneLineAvatarListItem:
+                                text:"Bizimlə əlaqə"
+                                on_release:root.manager.current='bizimleelaqe'
+                                IconLeftWidget:
+                                    icon:'phone'
+                                    on_release:root.manager.current='bizimleelaqe'
+                            OneLineAvatarListItem:
+                                text:"All rights reserved"
+                                on_release:root.manager.current='huquqlar'
+                                IconLeftWidget:
+                                    icon:"copyright"
+                                    on_release:root.manager.current='huquqlar'
+                            OneLineAvatarListItem:
+                                text:"Marketinq və qaydalar"
+                                on_release:root.manager.current='marketinqveqaydalar'
+                                IconLeftWidget:
+                                    icon:"shopify"
+                                    on_release:root.manager.current='marketinqveqaydalar'
+<LoadingScreen>
+    name:'loadingscreen'
+    Screen:
+        MDLabel:
+            text:'İnternetə qoşulur'
+            pos_hint:{'center_x':0.5,'center_y':0.6}
+            halign:'center'
+            font_size:'30sp'
+        MDSpinner:
+            size_hint: None, None
+            size: dp(46), dp(46)
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            active: True
+<ErrorScreen>
+    name:'errorscreen'
+    Screen:
+        MDIconButton:
+            icon:'wifi-strength-off'
+            pos_hint:{'center_x':0.5,'center_y':0.6}
+        MDLabel:
+            text:'Connection error'
+            pos_hint:{'center_x':0.5,'center_y':0.5}
+            halign:'center'
+        MDRectangleFlatButton:
+            text:'Try again'
+            pos_hint:{'center_x':0.5,'center_y':0.4}
+            on_release:app.yeniden()
+
+<MarketinqVeQaydalar>
+    name:'marketinqveqaydalar'
+    Screen:
+        NavigationLayout:
+            ScreenManager:
+                Screen:
+                    BoxLayout:
+                        orientation:'vertical'
+                        MDToolbar:
+                            title:"KORONA PARFUME"
+                            elevation:10
+                            left_action_items:[["menu",lambda x: naw_drawer.set_state('toggle')]]
+                        Carousel:
+                            MDLabel:
+                                font_size:'13sp'
+                                text:"Korona Parfume şirkətinin marketinq və qaydaları. \n\nKorona Parfume şirkəti biznes sahəsi üzrə xüsusi marketinq sistemi üzərində qurulmuşdur. Həm qazandıran həm də inkişaf etdirən bir sistemdir. Bu sistem Play Store tətbiqində yüklənən proqram vasitəsi ilə idarə olunacaqdır. Bu da sizə olduğunuz yerdən idarə edə biləcəyiniz gözəl biznes şansı yaradır. Bunun üçün də sistemin daha çox istehsalçı qismində, satış sahəsində çalışacaq əməkdaşlara ehtiyyac duyur. Bu satış üzrə çalışan əməkdaşlar bizlər və sizlər olacaq. Bu xüsusi marketinq sistemində çalışmaq və öz işinizi qurmaq istəyirsinizsə, sağdakı qaydaları oxuyub əməl etməyiniz kifayətdir.\n1)Play Store tətbiqindən Korona Parfume yazaraq proqramı yükləmək\n2)Giriş qeydiyyat bölməsinə daxil olaraq qeydiyyatdan keçmək.\n3)Sifarişləri düzgün qaydada seçmək və təsdiqləmək\n4)Hesabatları vaxtlı-vaxtında və dəqiq şəkildə aparmaq.\nBu sistemdə çalışmaq üçün sizə bütün köməklik olunacaqdır.İtirəcəyiniz heç bir şey yoxdur.Əksinə atdıöınız bütün addımlar sizə qazanc gətirəcək.Şirkətimiz, onun marketinq sistemi və iş fəaliyyəti ilə bağlı hər hansı sualınız yaranarsa və ya ətraflı məlumat almaq istəyirsinizsə bizə əlaqə vasitələrimizlə müraciət edə bilərsiniz.\nHörmətlə : Korona Parfume rəhbərliyi."
+
+            MDNavigationDrawer:
+                id:naw_drawer
+                BoxLayout:
+                    orientation:'vertical'
+                    ScrollView:
+                        MDList:
+                            OneLineAvatarListItem:
+                                text:"Menyu"
+                                on_release:root.manager.current='menu'
+                                IconLeftWidget:
+                                    icon:'menu'
+                                    on_release:root.manager.current='menu'
+                            OneLineAvatarListItem:
+                                text:"Axtarış"
+                                on_release:app.axtar_goster()
+                                IconLeftWidget:
+                                    icon:"magnify"
+                                    on_release:app.axtar_goster()
+                            OneLineAvatarListItem:
+                                text:"Ətirlər"
+                                on_release:root.manager.current='etirler'
+                                IconLeftWidget:
+                                    icon:"atom"
+                                    on_release:root.manager.current='etirler'
+                            OneLineAvatarListItem:
+                                text:"Bizim brendimiz"
+                                on_release:root.manager.current='bizimbrendimiz'
+                                IconLeftWidget:
+                                    icon:"shopping"
+                                    on_release:root.manager.current='bizimbrendimiz'
+                            OneLineAvatarListItem:
+                                text:"Bizimlə əlaqə"
+                                on_release:root.manager.current='bizimleelaqe'
+                                IconLeftWidget:
+                                    icon:'phone'
+                                    on_release:root.manager.current='bizimleelaqe'
+                            OneLineAvatarListItem:
+                                text:"All rights reserved"
+                                on_release:root.manager.current='huquqlar'
+                                IconLeftWidget:
+                                    icon:"copyright"
+                                    on_release:root.manager.current='huquqlar'
+                            OneLineAvatarListItem:
+                                text:"Marketinq və qaydalar"
+                                on_release:root.manager.current='marketinqveqaydalar'
+                                IconLeftWidget:
+                                    icon:"shopify"
+                                    on_release:root.manager.current='marketinqveqaydalar'
+<BizimBrendimiz>
+    name:'bizimbrendimiz'
+    Screen:
+        NavigationLayout:
+            ScreenManager:
+                Screen:
+                    BoxLayout:
+                        orientation:'vertical'
+                        MDToolbar:
+                            title:"KORONA PARFUME"
+                            elevation:10
+                            left_action_items:[["menu",lambda x: naw_drawer.set_state('toggle')]]
+                        MDFloatLayout:
+                            Carousel:
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        text:'10 ML'
+                                        size_hint_y:.1
+                                        halign:'center'
+                                    Image:
+                                        source:"two.jpg"
+                                        size_hint_y:.9
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        halign:'center'
+                                        size_hint_y:.1
+                                        text:'50 ML'
+                                    Image:
+                                        size_hint_y:.9
+                                        source:"three.jpg"
+
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        text:'50 ML'
+                                        halign:'center'
+                                        size_hint_y:.1
+                                    Image:
+                                        source:"four.jpg"
+                                        size_hint_y:.9
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        halign:'center'
+                                        size_hint_y:.1
+                                        text:'30 ML'
+                                    Image:
+                                        source:"five.jpg"
+                                        size_hint_y:.9
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        halign:'center'
+                                        size_hint_y:.1
+                                        text:'30 ML'
+                                    Image:
+                                        source:"six.jpg"
+                                        size_hint_y:.9
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        halign:'center'
+                                        size_hint_y:.1
+                                        text:'50 ML'
+                                    Image:
+                                        source:"seven.jpg"
+                                        size_hint_y:.9
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        text:'30 ML'
+                                        halign:'center'
+                                        size_hint_y:.1
+                                    Image:
+                                        source:"eight.jpg"
+                                        size_hint_y:.9
+
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        text:'50 ML'
+                                        halign:'center'
+                                        size_hint_y:.1
+                                    Image:
+                                        source:"nine.jpg"
+                                        size_hint_y:.9
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        halign:'center'
+                                        size_hint_y:.1
+                                        text:'30 ML'
+                                    Image:
+                                        source:"ten.jpg"
+                                        size_hint_y:.9
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        halign:'center'
+                                        size_hint_y:.1
+                                        text:'50 ML'
+                                    Image:
+                                        source:"eleven.jpg"
+                                        size_hint_y:.9
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        halign:'center'
+                                        size_hint_y:.1
+                                        text:'30 ML'
+                                    Image:
+                                        source:"twelve.jpg"
+                                        size_hint_y:.9
+
+
+
+
+
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        size_hint_y:.1
+                                        halign:'center'
+                                        text:'50 ML'
+                                    Image:
+                                        source:"thirteen.jpg"
+                                        size_hint_y:.9
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        text:'10 ML'
+                                        halign:'center'
+                                        size_hint_y:.1
+                                    Image:
+                                        source:"fourteen.jpg"
+                                        size_hint_y:.9
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        text:'50 ML'
+                                        halign:'center'
+                                        size_hint_y:.1
+                                    Image:
+                                        source:"fifteen.jpg"
+                                        size_hint_y:.9
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        text:'30 ML'
+                                        halign:'center'
+                                        size_hint_y:.1
+                                    Image:
+                                        source:"sixteen.jpg"
+                                        size_hint_y:.9
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        halign:'center'
+                                        size_hint_y:.1
+                                        text:'50 ML'
+                                    Image:
+                                        source:"nineteen.jpg"
+                                        size_hint_y:.9
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        halign:'center'
+                                        size_hint_y:.1
+                                        text:'30 ML'
+                                    Image:
+                                        source:"twenty.jpg"
+                                        size_hint_y:.9
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        text:'30 ML'
+                                        halign:'center'
+                                        size_hint_y:.1
+                                    Image:
+                                        source:"twentyone.jpg"
+                                        size_hint_y:.9
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        text:'50 ML'
+                                        halign:'center'
+                                        size_hint_y:.1
+                                    Image:
+                                        source:"twentytwo.jpg"
+                                        size_hint_y:.9
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        text:'20 ML'
+                                        halign:'center'
+                                        size_hint_y:.1
+                                    Image:
+                                        source:"twentythree.jpg"
+                                        size_hint_y:.9
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        text:'30 ML'
+                                        halign:'center'
+                                        size_hint_y:.1
+                                    Image:
+                                        source:"twentyfour.jpg"
+                                        pos_hint_y:.9
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        halign:'center'
+                                        size_hint_y:.1
+                                        text:'50 ML'
+                                    Image:
+                                        source:"twentyfive.jpg"
+                                        pos_hint_y:.9
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        text:'50 ML'
+                                        halign:'center'
+                                        size_hint_y:.1
+                                    Image:
+                                        source:"twentysix.jpg"
+                                        pos_hint_y:.9
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        text:'50 ML'
+                                        halign:'center'
+                                        size_hint_y:.1
+                                    Image:
+                                        source:"twentyseven.jpg"
+                                        pos_hint_y:.9
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        text:'20 ML'
+                                        halign:'center'
+                                        size_hint_y:.1
+                                    Image:
+                                        source:"twentyeight.jpg"
+                                        pos_hint_y:.9
+                                MDCard:
+                                    orientation:'vertical'
+                                    MDLabel:
+                                        halign:'center'
+                                        text:'30 ML'
+                                        size_hint_y:.1
+                                    Image:
+                                        source:"twentynine.jpg"
+                                        pos_hint_y:0.9
+
+
+                        MDBottomAppBar:
+                            MDToolbar:
+                                title:"Hüquqlar qorunur"
+                                type:"bottom"
+                                mode:"end"
+                                on_action_button:root.manager.current='huquqlar'
+                                icon:"copyright"
+                                align_text:"left"
+
+            MDNavigationDrawer:
+                id:naw_drawer
+                BoxLayout:
+                    orientation:'vertical'
+                    ScrollView:
+                        MDList:
+                            OneLineAvatarListItem:
+                                text:"Menyu"
+                                on_release:root.manager.current='menu'
+                                IconLeftWidget:
+                                    icon:'menu'
+                                    on_release:root.manager.current='menu'
+                            OneLineAvatarListItem:
+                                text:"Axtarış"
+                                on_release:app.axtar_goster()
+                                IconLeftWidget:
+                                    icon:"magnify"
+                                    on_release:app.axtar_goster()
+                            OneLineAvatarListItem:
+                                text:"Ətirlər"
+                                on_release:root.manager.current='etirler'
+                                IconLeftWidget:
+                                    icon:"atom"
+                                    on_release:root.manager.current='etirler'
+                            OneLineAvatarListItem:
+                                text:"Bizim brendimiz"
+                                on_release:root.manager.current='bizimbrendimiz'
+                                IconLeftWidget:
+                                    icon:"shopping"
+                                    on_release:root.manager.current='bizimbrendimiz'
+                            OneLineAvatarListItem:
+                                text:"Bizimlə əlaqə"
+                                on_release:root.manager.current='bizimleelaqe'
+                                IconLeftWidget:
+                                    icon:'phone'
+                                    on_release:root.manager.current='bizimleelaqe'
+                            OneLineAvatarListItem:
+                                text:"All rights reserved"
+                                on_release:root.manager.current='huquqlar'
+                                IconLeftWidget:
+                                    icon:"copyright"
+                                    on_release:root.manager.current='huquqlar'
+                            OneLineAvatarListItem:
+                                text:"Marketinq və qaydalar"
+                                on_release:root.manager.current='marketinqveqaydalar'
+                                IconLeftWidget:
+                                    icon:"shopify"
+                                    on_release:root.manager.current='marketinqveqaydalar'
+<BizimleElaqe>
+    name:'bizimleelaqe'
+    Screen:
+        NavigationLayout:
+            ScreenManager:
+                Screen:
+                    BoxLayout:
+                        orientation:'vertical'
+                        MDToolbar:
+                            title:"KORONA PARFUME"
+                            elevation:10
+                            left_action_items:[["menu",lambda x: naw_drawer.set_state('toggle')]]
+                        MDGridLayout:
+                            cols:2
+                            rows:4
+                            padding:dp(2)
+                            MDIcon:
+                                icon:"instagram"
+                                halign:"center"
+                            MDLabel:
+                                text:"/korona_parfume"
+                            MDIcon:
+                                icon:"whatsapp"
+                                halign:"center"
+                            MDLabel:
+                                text:"+994-55-808-80-60"
+                            MDIcon:
+                                icon:'cellphone'
+                                halign:'center'
+                            MDLabel:
+                                text:"+994-55-819-21-68(İşlə bağlı)"
+                            MDIcon:
+                                icon:'telegram'
+                                halign:'center'
+                            MDLabel:
+                                text:'t.me/koronaparfume'
+
+
+
+
+
+
+            MDNavigationDrawer:
+                id:naw_drawer
+                BoxLayout:
+                    orientation:'vertical'
+                    ScrollView:
+                        MDList:
+                            OneLineAvatarListItem:
+                                text:"Menyu"
+                                on_release:root.manager.current='menu'
+                                IconLeftWidget:
+                                    icon:'menu'
+                                    on_release:root.manager.current='menu'
+                            OneLineAvatarListItem:
+                                text:"Axtarış"
+                                on_release:app.axtar_goster()
+                                IconLeftWidget:
+                                    icon:"magnify"
+                                    on_release:app.axtar_goster()
+                            OneLineAvatarListItem:
+                                text:"Ətirlər"
+                                on_release:root.manager.current='etirler'
+                                IconLeftWidget:
+                                    icon:"atom"
+                                    on_release:root.manager.current='etirler'
+                            OneLineAvatarListItem:
+                                text:"Bizim brendimiz"
+                                on_release:root.manager.current='bizimbrendimiz'
+                                IconLeftWidget:
+                                    icon:"shopping"
+                                    on_release:root.manager.current='bizimbrendimiz'
+                            OneLineAvatarListItem:
+                                text:"Bizimlə əlaqə"
+                                on_release:root.manager.current='bizimleelaqe'
+                                IconLeftWidget:
+                                    icon:'phone'
+                                    on_release:root.manager.current='bizimleelaqe'
+                            OneLineAvatarListItem:
+                                text:"All rights reserved"
+                                on_release:root.manager.current='huquqlar'
+                                IconLeftWidget:
+                                    icon:"copyright"
+                                    on_release:root.manager.current='huquqlar'
+                            OneLineAvatarListItem:
+                                text:"Marketinq və qaydalar"
+                                on_release:root.manager.current='marketinqveqaydalar'
+                                IconLeftWidget:
+                                    icon:"shopify"
+                                    on_release:root.manager.current='marketinqveqaydalar'
+<TestEtir>
+    name:"testetir"
+    Screen:
+        NavigationLayout:
+            ScreenManager:
+                Screen:
+                    BoxLayout:
+                        orientation:'vertical'
+                        MDToolbar:
+                            title:"KORONA PARFUME"
+                            elevation:10
+                            left_action_items:[["menu",lambda x: naw_drawer.set_state('toggle')]]
+                        MDLabel:
+                            text:"Test etir sehifesi"
+
+
+            MDNavigationDrawer:
+                id:naw_drawer
+                BoxLayout:
+                    orientation:'vertical'
+                    ScrollView:
+                        MDList:
+                            OneLineAvatarListItem:
+                                text:"Geri"
+                                on_release:root.manager.current="etirler"
+                                IconLeftWidget:
+                                    icon:"backburger"
+                                    on_release:root.manager.current="etirler"
+                            OneLineAvatarListItem:
+                                text:"Menyu"
+                                on_release:root.manager.current='menu'
+                                IconLeftWidget:
+                                    icon:'menu'
+                                    on_release:root.manager.current='menu'
+                            OneLineAvatarListItem:
+                                text:"Axtarış"
+                                on_release:app.axtar_goster()
+                                IconLeftWidget:
+                                    icon:"magnify"
+                                    on_release:app.axtar_goster()
+                            OneLineAvatarListItem:
+                                text:"Ətirlər"
+                                on_release:root.manager.current='etirler'
+                                IconLeftWidget:
+                                    icon:"atom"
+                                    on_release:root.manager.current='etirler'
+                            OneLineAvatarListItem:
+                                text:"Bizim brendimiz"
+                                on_release:root.manager.current='bizimbrendimiz'
+                                IconLeftWidget:
+                                    icon:"shopping"
+                                    on_release:root.manager.current='bizimbrendimiz'
+                            OneLineAvatarListItem:
+                                text:"Bizimlə əlaqə"
+                                on_release:root.manager.current='bizimleelaqe'
+                                IconLeftWidget:
+                                    icon:'phone'
+                                    on_release:root.manager.current='bizimleelaqe'
+                            OneLineAvatarListItem:
+                                text:"All rights reserved"
+                                on_release:root.manager.current='huquqlar'
+                                IconLeftWidget:
+                                    icon:"copyright"
+                                    on_release:root.manager.current='huquqlar'
+                            OneLineAvatarListItem:
+                                text:"Marketinq və qaydalar"
+                                on_release:root.manager.current='marketinqveqaydalar'
+                                IconLeftWidget:
+                                    icon:"shopify"
+                                    on_release:root.manager.current='marketinqveqaydalar'
+
+
+
+
+<MenuScreen>
+    name:'menu'
+    Screen:
+        MDBoxLayout:
+            orientation:'vertical'
+            MDToolbar:
+                title:'KORONA PARFUME'
+                elevation:10
+            MDCard:
+                orientation:'vertical'
+                size_hint:.5,.5
+                pos_hint:{'center_x':0.5,'center_y':0.7}
+                elevation: 0
+                Image:
+                    source: "ss.png"
+                    allow_stretch: True
+                    keep_ratio:False
+                    ext:'png'
+            MDFloatLayout:
+                id:silinmeli_button_olan_layout
+                MagicButton:
+                    text:'Ətirlər'
+                    pos_hint:{'center_x':0.5,'center_y':0.7}
+                    size_hint:.4,.1
+                    on_press:self.wobble()
+                    on_release:app.etirlerkechid()
+                MDSeparator:
+                    pos_hint:{'center_y':0.6}
+                MagicButton:
+                    text:'Bizim brendimiz'
+                    pos_hint:{'center_x':0.5,'center_y':0.5}
+                    size_hint:.4,.1
+                    on_press:self.wobble()
+                    on_release:root.manager.current = 'bizimbrendimiz'
+                MDSeparator:
+                    pos_hint:{'center_y':0.4}
+                MagicButton:
+                    text:'Bizimlə əlaqə'
+                    pos_hint:{'center_x':0.5,'center_y':0.3}
+                    size_hint:.4,.1
+                    on_press:self.wobble()
+                    on_release:root.manager.current='bizimleelaqe'
+                MDSeparator:
+                    pos_hint:{'center_y':0.2}
+                MagicButton:
+                    id:button_for_login_and_signup
+                    text:'Giriş&Qeydiyyat'
+                    pos_hint:{'center_x':0.5,'center_y':0.1}
+                    size_hint:.4,.1
+                    on_press:self.wobble()
+                    on_release:app.deyismeli()
+            MDBottomAppBar:
+                MDToolbar:
+                    anchor_title:"left"
+                    title:"Hüquqlar qorunur"
+                    icon:"copyright"
+                    mode:"end"
+                    type:"bottom"
+                    on_action_button:root.manager.current='huquqlar'
+
+<Huquqlar>
+    name:'huquqlar'
+    Screen:
+        NavigationLayout:
+            ScreenManager:
+                Screen:
+                    BoxLayout:
+                        orientation:'vertical'
+                        MDToolbar:
+                            title:"KORONA PARFUME"
+                            elevation:10
+                            left_action_items:[["menu",lambda x: naw_drawer.set_state('toggle')]]
+                        MDBoxLayout:
+                            orientation:'vertical'
+                            spacing:"3dp"
+                            MDLabel:
+                                text:"Müəlliflik hüququ Azərbaycanda qanunla qorunur. Müəllif - əsərin yaradıcısı olan fiziki şəxsdir. Müəlliflik hüququnun yaranması və həyata keçirilməsi üçün əsərin qeydiyyata alınması,yaxud hər hansı başqa üsullarla rəsmiləşdirilməsi tələb olunmur. Korona parfume olaraq biz şirkətə aid olan bütün sistem və vasitələrin müəlliflik hüquqlarını saxlayırıq. Bizim iş sistemimizə və fəaliyyətimizə zərər vuracaq hər hansı hal baş verərsə, bu halın aradan qaldırılması üçün qanuni yollardan istifadə olunacaqdır. Bu sistem və ya iş prinsipindən istifadə etmək istəyən şəxs ilk öncə Korona Parfume qurucularına müraciət etməli, əgər müsbət rəy alarsa o zaman istifadə edə bilmək hüququnu qazanacaqdır.Bütün bu sistemdə fəaliyyət göstərən şirkətlər bu işin necə yollardan keçdiyini bilməkdədirlər. Buna görə də işimizə tam ciddi yanaşıb,bir-birimizə şans diləyərək fəaliyyətimizi davam etdirməliyik. Hörmətlə, Korona Parfume şirkətinin rəhbərliyi."
+                                halign:"center"
+                                font_size:'13sp'
+
+            MDNavigationDrawer:
+                id:naw_drawer
+                BoxLayout:
+                    orientation:'vertical'
+                    ScrollView:
+                        MDList:
+                            OneLineAvatarListItem:
+                                text:"Menyu"
+                                on_release:root.manager.current='menu'
+                                IconLeftWidget:
+                                    icon:'menu'
+                                    on_release:root.manager.current='menu'
+                            OneLineAvatarListItem:
+                                text:"Axtarış"
+                                on_release:app.axtar_goster()
+                                IconLeftWidget:
+                                    icon:"magnify"
+                                    on_release:app.axtar_goster()
+                            OneLineAvatarListItem:
+                                text:"Ətirlər"
+                                on_release:root.manager.current='etirler'
+                                IconLeftWidget:
+                                    icon:"atom"
+                                    on_release:root.manager.current='etirler'
+                            OneLineAvatarListItem:
+                                text:"Bizim brendimiz"
+                                on_release:root.manager.current='bizimbrendimiz'
+                                IconLeftWidget:
+                                    icon:"shopping"
+                                    on_release:root.manager.current='bizimbrendimiz'
+                            OneLineAvatarListItem:
+                                text:"Bizimlə əlaqə"
+                                on_release:root.manager.current='bizimleelaqe'
+                                IconLeftWidget:
+                                    icon:'phone'
+                                    on_release:root.manager.current='bizimleelaqe'
+                            OneLineAvatarListItem:
+                                text:"All rights reserved"
+                                on_release:root.manager.current='huquqlar'
+                                IconLeftWidget:
+                                    icon:"copyright"
+                                    on_release:root.manager.current='huquqlar'
+                            OneLineAvatarListItem:
+                                text:"Marketinq və qaydalar"
+                                on_release:root.manager.current='marketinqveqaydalar'
+                                IconLeftWidget:
+                                    icon:"shopify"
+                                    on_release:root.manager.current='marketinqveqaydalar'
+
+<Etirler>
+    name:'etirler'
+    Screen:
+        NavigationLayout:
+            ScreenManager:
+                Screen:
+                    BoxLayout:
+                        id:axtarisucun
+                        orientation:'vertical'
+                        MDToolbar:
+                            title:"KORONA PARFUME"
+                            elevation:10
+                            left_action_items:[["menu",lambda x: naw_drawer.set_state('toggle')]]
+                        Carousel:
+                            id:crsl9
+
+            MDNavigationDrawer:
+                id:naw_drawer
+                BoxLayout:
+                    orientation:'vertical'
+                    ScrollView:
+                        MDList:
+                            OneLineAvatarListItem:
+                                text:"Menyu"
+                                on_release:root.manager.current='menu'
+                                IconLeftWidget:
+                                    icon:'menu'
+                                    on_release:root.manager.current='menu'
+                            OneLineAvatarListItem:
+                                text:"Axtarış"
+                                on_release:app.axtar_goster()
+                                IconLeftWidget:
+                                    icon:"magnify"
+                                    on_release:app.axtar_goster()
+                            OneLineAvatarListItem:
+                                text:"Ətirlər"
+                                on_release:root.manager.current='etirler'
+                                IconLeftWidget:
+                                    icon:"atom"
+                                    on_release:root.manager.current='etirler'
+                            OneLineAvatarListItem:
+                                text:"Bizim brendimiz"
+                                on_release:root.manager.current='bizimbrendimiz'
+                                IconLeftWidget:
+                                    icon:"shopping"
+                                    on_release:root.manager.current="bizimbrendimiz"
+                            OneLineAvatarListItem:
+                                text:"Bizimlə əlaqə"
+                                on_release:root.manager.current='bizimleelaqe'
+                                IconLeftWidget:
+                                    icon:'phone'
+                                    on_release:root.manager.current='bizimleelaqe'
+                            OneLineAvatarListItem:
+                                text:"All rights reserved"
+                                on_release:root.manager.current='huquqlar'
+                                IconLeftWidget:
+                                    icon:"copyright"
+                                    on_release:root.manager.current='huquqlar'
+                            OneLineAvatarListItem:
+                                text:"Marketinq və qaydalar"
+                                on_release:root.manager.current='marketinqveqaydalar'
+                                IconLeftWidget:
+                                    icon:"shopify"
+                                    on_release:root.manager.current='marketinqveqaydalar'
+<GirisVeQeydiyyat>
+    name:'girisveqeydiyyat'
+    Screen:
+        MDFloatLayout:
+            MagicButton:
+                on_press:self.wobble()
+                text:"Giriş"
+                pos_hint:{'center_x':0.5,'center_y':0.6}
+                on_release:root.manager.current='giris'
+            MDSeparator:
+                pos_hint:{'center_x':0.5,'center_y':0.5}
+            MagicButton:
+                on_press:self.wobble()
+                text:"Qeydiyyat"
+                pos_hint:{'center_x':0.5,'center_y':0.4}
+                on_release:root.manager.current='qeydiyyat'
+            MagicButton:
+                on_press:self.wobble()
+                text:"Geri"
+                pos_hint:{'center_x':0.2,'center_y':0.1}
+                on_release:root.manager.current='menu'
+<Giris>
+    name:'giris'
+    Screen:
+        MDFloatLayout:
+            MagicButton:
+                on_press:self.wobble()
+                text:"Geri"
+                pos_hint:{'center_x':0.2,'center_y':0.1}
+                on_release:root.manager.current='girisveqeydiyyat'
+            MDIconButton:
+                icon:'account-circle'
+                pos_hint:{'center_x':0.5,'center_y':0.9}
+                user_font_size:'64sp'
+            MDSeparator:
+                pos_hint:{'center_x':0.5,'center_y':0.8}
+                height:'2dp'
+            MDLabel:
+                text:'Korona Parfume'
+                font_size:'25sp'
+                font_name:'CormorantUnicase-Light.ttf'
+                pos_hint:{'center_x':0.5,'center_y':0.7}
+                halign:'center'
+            MDTextField:
+                id:istifadeciadi
+                mode:'rectangle'
+                hint_text:'İstifadəçi adı  '
+                pos_hint:{'center_x':0.5,'center_y':0.6}
+                size_hint_x:.7
+            MDTextField:
+                id:sifre
+                mode:'rectangle'
+                hint_text:'Şifrə     '
+                pos_hint:{'center_x':0.5,'center_y':0.5}
+                size_hint_x:.7
+                password:True
+            MagicButton:
+                on_press:self.wobble()
+                text:'Giriş'
+                pos_hint:{'center_x':0.5,'center_y':0.4}
+                on_release:app.LogIn()
+            MDSeparator:
+                pos_hint:{'center_x':0.5,'center_y':0.3}
+                height:'2dp'
+            MDTextButton:
+                text: "Şifrənizi unutmusunuz?"
+                custom_color: 1, 0, 0, 1
+                pos_hint:{'center_x':0.5,'center_y':0.2}
+                on_release:app.forget_password()
+<Qeydiyyat>
+    name:'qeydiyyat'
+    id:qeydiyyatscreen
+    Screen:
+        MDFloatLayout:
+            MDIconButton:
+                icon:'account-edit'
+                pos_hint:{'center_x':0.5,'center_y':0.9}
+                user_font_size:'64sp'
+            MDSeparator:
+                pos_hint:{'center_x':0.5,'center_y':0.8}
+            MDLabel:
+                text:'Korona Parfume'
+                font_size:'25sp'
+                font_name:'CormorantUnicase-Light.ttf'
+                pos_hint:{'center_x':0.5,'center_y':0.7}
+                halign:'center'
+            MDTextField:
+                id:ad
+                mode:'rectangle'
+                hint_text:'Adınız     '
+                pos_hint:{'center_x':0.5,'center_y':0.6}
+                size_hint_x:.7
+                required:True
+            MDTextField:
+                id:soyad
+                mode:'rectangle'
+                hint_text:'Soyadınız     '
+                pos_hint:{'center_x':0.5,'center_y':0.5}
+                size_hint_x:.7
+                required:True
+            MDRoundFlatButton:
+                id:dogumbutton
+                text:'Doğum tarixi'
+                pos_hint:{'center_x':0.5,'center_y':0.4}
+                on_release:app.show_date()
+            MagicButton:
+                on_press:self.wobble()
+                text:'Növbəti'
+                pos_hint:{'center_x':0.5,'center_y':0.3}
+                on_release:app.first_sign_check()
+            MagicButton:
+                on_press:self.wobble()
+                text:'Geri'
+                pos_hint:{'center_x':0.2,'center_y':0.1}
+                on_release:root.manager.current='girisveqeydiyyat'
+<QeydiyyatNumEmailPassword>
+    name:'qnmp'
+    Screen:
+        MDFloatLayout:
+            MDIconButton:
+                icon:'cellphone'
+                user_font_size:'40sp'
+                pos_hint:{'center_x':0.3,'center_y':0.9}
+            MDIconButton:
+                icon:'email'
+                user_font_size:'40sp'
+                pos_hint:{'center_x':0.5,'center_y':0.9}
+            MDIconButton:
+                icon:'key'
+                user_font_size:'40sp'
+                pos_hint:{'center_x':0.7,'center_y':0.9}
+            MDSeparator:
+                pos_hint:{'center_x':0.5,'center_y':0.8}
+            MDTextField:
+                id:email
+                hint_text:"Email       "
+                icon_right:'email'
+                size_hint_x:.7
+                pos_hint:{'center_x':0.5,'center_y':0.7}
+                mode:'rectangle'
+                required:True
+            MDTextField:
+                id:number
+                hint_text:"Telefon nömrəsi"
+                icon_right:'cellphone'
+                size_hint_x:.7
+                pos_hint:{'center_x':0.5,'center_y':0.6}
+                mode:'rectangle'
+                required:True
+                input_filter:'int'
+            MDTextField:
+                id:password_new
+                hint_text:"Şifrə   "
+                icon_right:'key'
+                size_hint_x:.7
+                pos_hint:{'center_x':0.5,'center_y':0.5}
+                mode:'rectangle'
+                password:True
+                required:True
+            MDTextField:
+                id:password_new2
+                hint_text:"Şifrə təkrar "
+                icon_right:'key'
+                size_hint_x:.7
+                pos_hint:{'center_x':0.5,'center_y':0.4}
+                mode:'rectangle'
+                password:True
+                required:True
+            MDTextField:
+                id:username
+                hint_text:'İstifadəçi adınız'
+                icon_right:'account'
+                size_hint_x:.7
+                pos_hint:{'center_x':0.5,'center_y':0.3}
+                mode:'rectangle'
+                required:True
+            MDFillRoundFlatButton:
+                text:'Qeydiyyatdan keç'
+                pos_hint:{'center_x':0.5,'center_y':0.2}
+                on_release:app.qeydiyyatdan_kec()
+            MagicButton:
+                on_press:self.wobble()
+                text:'Geri'
+                pos_hint:{'center_x':0.2,'center_y':0.1}
+                on_release:root.manager.current='qeydiyyat'
+<QeydiyyatAuthenticator>
+    name:'qa'
+    Screen:
+        MDFloatLayout:
+            MDLabel:
+                text:'Mail ünvanınıza təsdiq kodu göndərildi'
+                pos_hint:{'center_x':0.5,'center_y':0.9}
+                halign:'center'
+            MDSeparator:
+                pos_hint:{'center_y':0.8}
+            MDLabel:
+                halign:'center'
+                text:'Kodu buraya yazın'
+                pos_hint:{'center_x':0.5,'center_y':0.7}
+            MDTextField:
+                text_align:'center'
+                mode:'rectangle'
+                pos_hint:{'center_x':0.5,'center_y':0.6}
+                required:True
+                input_filter:'int'
+                id:authcode
+                size_hint_x:.5
+                max_text_length:6
+            MDRectangleFlatButton:
+                text:'Ok'
+                pos_hint:{'center_x':0.5,'center_y':0.5}
+                size_hint:None,None
+                on_release:app.check_authentication_code()
+            MDLabel:
+                text:'Kod əldə etmədiniz?'
+                halign:'center'
+                pos_hint:{'center_x':0.5,'center_y':0.4}
+            MDTextButton:
+                text:"Mail'i dəyişin"
+                custom_color:0, 1, 0, 1
+                pos_hint:{'center_x':0.5,'center_y':0.3}
+                on_release:root.manager.current = 'qnmp'
+            MDTextButton:
+                text:'Kodu yenidən göndər'
+                custom_color:0, 1, 0, 1
+                pos_hint:{'center_x':0.5,'center_y':0.2}
+                on_release:app.resend_code()
+            MagicButton:
+                on_press:self.wobble()
+                text:'Geri'
+                pos_hint:{'center_x':0.2,'center_y':0.1}
+                on_release:root.manager.current='qnmp'
+<IdIste>
+    name:'idiste'
+    FloatLayout:
+        MDLabel:
+            text:'Zəhmət olmasa sizi dəvət edən satıcının İD nömrəsini yazın'
+            halign:'center'
+            pos_hint:{'center_x':0.5,'center_y':0.7}
+        MDTextField:
+            mode:'rectangle'
+            size_hint_x:.7
+            pos_hint:{'center_x':0.5,'center_y':0.6}
+            id:sifarisciidsi
+            halign:'center'
+        MDRectangleFlatButton:
+            text:'Irəli'
+            pos_hint:{'center_x':0.5,'center_y':0.5}
+            on_release:app.idyoxla()
+        MDRectangleFlatButton:
+            text:'Belə bir şəxs yoxdur'
+            pos_hint:{'center_x':0.5,'center_y':0.4}
+            on_release:app.qacmenuya()
